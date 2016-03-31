@@ -81,6 +81,7 @@ def kmeans(data,centroids,distf,centroidf,cutoff):
 	
 	"""
 	k = len(centroids)
+        count_iters = 0
 	while True:
 		distances = [map(lambda x: distf(x,y),centroids) for y in data]
 		data_to_centroids = [min(enumerate(x),key=lambda x:x[1])[0] for x in distances]
@@ -100,9 +101,12 @@ def kmeans(data,centroids,distf,centroidf,cutoff):
 		)
 		
 		changes = [distf(new_centroids[i],centroids[i]) for i in range(k)]
-		
+	        	
+                count_iters += 1
 		if max(changes)<=cutoff:
-			return centroids,data_to_centroids,distances
+		    return centroids,data_to_centroids,distances
+                elif count_iters > 1000:
+                    return centroids,data_to_centroids,distances
 		
 		centroids = new_centroids
 

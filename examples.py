@@ -35,6 +35,8 @@ points = [[random.random()*10,random.random()*10] for _ in range(10)]
 points.extend([[random.random()*10+10,random.random()*10+10] for _ in range(10)])
 
 print "Clustering with euclidean distance"
+print points
+print points[:2]
 kme = kmeans_euclid(points,points[:2],0.1)
 
 plot2d(points,kme[0],kme[1])
